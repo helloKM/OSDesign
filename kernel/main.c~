@@ -25,31 +25,18 @@
  * jmp from kernel.asm::_start. 
  * 
  *****************************************************************************/
-void clear()
-{
-	clear_screen(0,console_table[current_console].cursor);
-	console_table[current_console].crtc_start = 0;
-	console_table[current_console].cursor = 0;
-	
-}
 
 PUBLIC int kernel_main()
 {	
 	
-/*	disp_color_str("   *##*    #*  #    *###   #    *##*      #    #  ####*  *####\n", 0xb);
-	delay(10);
-	disp_color_str(" *#    #*  ##* #  *#      #   *#    #*   #    #  #    # #     \n", 0xa);
-	disp_color_str(" #      #  #*# #  #      #    #      #  #    #  #    #  ###*  \n", 0xd);
-	disp_color_str(" *#    #*  # *##  *#    #     *#    #* #    #  #    #      #  \n", 0xc);
-	disp_color_str("   *##*    #  *#   *### #####   *##*   *##*   #####*  ####*   \n", 0x9);*/
-	
-
+	disp_color_str("\n\n\n\n\n\n", 0xc);
 	disp_color_str("  ***************************************************************************  \n\n", 0xc);
 	disp_color_str("  ========================== Welcome to [KM_OS1.0] ==========================  \n\n", 0xc);
 	disp_color_str("  ==========================     Command List:     ==========================  \n", 0x9);
 	disp_color_str("  |                               [ ls ]: Show all the files                |  \n", 0xb);
 	disp_color_str("  |      [ rili xxxx(like 'rili 2015') ]: Show the calendar of a year       |  \n", 0xb);
 	disp_color_str("  |                             [ game ]: Play 24 points                    |  \n", 0xb);
+	disp_color_str("  |                  * Press (SHIFT + F1~F3) to switch tty.*                |  \n", 0xb);
 	disp_color_str("  ===========================================================================  \n\n", 0x9);
 	disp_color_str("  ***************************************************************************  \n", 0xc);
 	int i, j, eflags, prio;
@@ -282,7 +269,7 @@ void shabby_shell(const char * tty_name)
 	char rdbuf[128];
 
 	while (1) {
-		write(1, "$ ", 2);
+		write(1, " [cmd]>> ", 9);
 		int r = read(0, rdbuf, 70);
 		rdbuf[r] = 0;
 
@@ -350,8 +337,8 @@ void Init()
 
 	/* extract `cmd.tar' */
 	untar("/cmd.tar");
-
-	printf("\n\nPress (SHIFT + F1~F3) to switch tty.\n\n\n\n[TTY #0]\n\n");
+	printf("\n\n\n");
+	//printf("\n\nPress (SHIFT + F1~F3) to switch tty.\n\n\n\n[TTY #0]\n\n");
 
 	char * tty_list[] = {"/dev_tty0","/dev_tty1", "/dev_tty2"};
 

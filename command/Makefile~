@@ -12,7 +12,7 @@ CFLAGS		= -I ../include/ -c -fno-builtin -fno-stack-protector -Wall
 LDFLAGS		= -Ttext 0x1000
 DASMFLAGS	= -D
 LIB		= ../lib/orangescrt.a
-BIN		= echo pwd ls calendar test rili game calculate
+BIN		= echo pwd ls calendar test rili game cal
 
 # All Phony Targets
 .PHONY : everything final clean realclean disasm all install
@@ -66,11 +66,6 @@ rili.o: rili.c ../include/type.h  ../include/stdio.h
 rili : rili.o start.o $(LIB)
 	$(LD) $(LDFLAGS) -o $@ $?
 
-calculate.o: calculate.c ../include/type.h  ../include/stdio.h
-	$(CC) $(CFLAGS) -o $@ $<
-
-calculate : calculate.o start.o $(LIB)
-	$(LD) $(LDFLAGS) -o $@ $?
 
 game.o: game.c ../include/type.h  ../include/stdio.h
 	$(CC) $(CFLAGS) -o $@ $<
@@ -84,6 +79,13 @@ ls.o: ls.c ../include/type.h ../include/stdio.h
 
 ls : ls.o start.o $(LIB)
 	$(LD) $(LDFLAGS) -o $@ $?
+
+cal.o: cal.c ../include/type.h ../include/stdio.h
+	$(CC) $(CFLAGS) -o $@ $<
+
+cal : cal.o start.o $(LIB)
+	$(LD) $(LDFLAGS) -o $@ $?
+
 
 calendar.o: calendar.c ../include/type.h ../include/stdio.h
 	$(CC) $(CFLAGS) -o $@ $<
