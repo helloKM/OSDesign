@@ -1,0 +1,11 @@
+#include "stdio.h"
+#include "stdlib.h"
+
+int main(int argc, char * argv[])
+{
+	int x;
+	x=rand();
+	printf("%d\n",x)
+
+	return 0;
+}
